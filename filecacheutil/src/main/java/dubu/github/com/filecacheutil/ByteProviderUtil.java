@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public abstract class ByteProviderUtil {
+public  class ByteProviderUtil {
+
+    private ByteProviderUtil() {}
+
     public static ByteProvider create(final InputStream is) {
         return new ByteProvider() {
             @Override
