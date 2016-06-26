@@ -11,7 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-public abstract class IOUtils {
+public final class IOUtils {
+
+    private IOUtils() {}
+
     public static String read(InputStream is) throws IOException {
         InputStreamReader reader = null;
         try {
