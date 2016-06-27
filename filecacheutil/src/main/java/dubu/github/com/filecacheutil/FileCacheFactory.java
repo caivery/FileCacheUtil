@@ -9,6 +9,12 @@ public class FileCacheFactory {
     private static boolean initialized = false;
     private static FileCacheFactory instance = new FileCacheFactory();
 
+    private HashMap<String, FileCache> cacheMap = new HashMap<String, FileCache>();
+    private File cacheBaseDir;
+
+    private FileCacheFactory() {
+    }
+
     public static void initialize(Context context) {
         if (!initialized) {
             synchronized (instance) {
@@ -26,12 +32,6 @@ public class FileCacheFactory {
                     "Not initialized. You must call FileCacheFactory.initialize() before getInstance()");
         }
         return instance;
-    }
-
-    private HashMap<String, FileCache> cacheMap = new HashMap<String, FileCache>();
-    private File cacheBaseDir;
-
-    private FileCacheFactory() {
     }
 
     private void init(Context context) {
