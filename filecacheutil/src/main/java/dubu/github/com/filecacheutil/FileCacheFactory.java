@@ -38,11 +38,11 @@ public class FileCacheFactory {
         cacheBaseDir = context.getCacheDir();
     }
 
-    public FileCache create(String cacheName, int maxKbSizes) throws FileCacheAleadyExistException {
+    public FileCache create(String cacheName, int maxKbSizes) throws FileCacheAlreadyExistException {
         synchronized (cacheMap) {
             FileCache cache = cacheMap.get(cacheName);
             if (cache != null) {
-                throw new FileCacheAleadyExistException(String.format("FileCache[%s] Aleady exists", cacheName));
+                throw new FileCacheAlreadyExistException(String.format("FileCache[%s] Aleady exists", cacheName));
             }
             File cacheDir = new File(cacheBaseDir, cacheName);
             cache = new FileCacheImpl(cacheDir, maxKbSizes);
