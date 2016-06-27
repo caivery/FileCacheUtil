@@ -10,8 +10,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class IOUtils {
+
+    private static final Logger LOGGER = Logger.getLogger(IOUtils.class.getName());
 
     private IOUtils() {}
 
@@ -69,6 +73,7 @@ public final class IOUtils {
             try {
                 stream.close();
             } catch (IOException e) {
+                LOGGER.log(Level.INFO,e.getMessage(),e);
             }
         }
     }
