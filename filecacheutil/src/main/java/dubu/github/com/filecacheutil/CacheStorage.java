@@ -58,15 +58,15 @@ public class CacheStorage {
     public File get(String filename) {
         readLock.lock();
         try {
-            CacheFile cachdFile = cacheFileMap.get(filename);
-            if (cachdFile == null) {
+            CacheFile cachedFile = cacheFileMap.get(filename);
+            if (cachedFile == null) {
                 return null;
             }
-            if (cachdFile.file.exists()) {
-                moveHitEntryToFirst(filename, cachdFile);
-                return cachdFile.file;
+            if (cachedFile.getFile().exists()) {
+                moveHitEntryToFirst(filename, cachedFile);
+                return cachedFile.getFile();
             }
-            removeCacheFileFromMap(filename, cachdFile);
+            removeCacheFileFromMap(filename, cachedFile);
             return null;
         } finally {
             readLock.unlock();
@@ -173,7 +173,7 @@ public class CacheStorage {
                 return;
 
             removeCacheFileFromMap(filename, cacheFile);
-            cacheFile.file.delete();
+            cacheFile.getFile().delete();
         } finally {
             writeLock.unlock();
         }
@@ -193,14 +193,32 @@ public class CacheStorage {
 
 
     private static class CacheFile {
-        public File file;
-        public long size;
+
+        private File file;
+        private long size;
 
         public CacheFile(File file) {
             super();
             this.file = file;
             this.size = file.length();
         }
+
+        public File getFile() {
+            return this.file;
+        }
+
+        public void setFile(File file) {
+            this.file = file;
+        }
+
+        public long getSize() {
+            return this.size;
+        }
+
+        public void setSize(long size) {
+            this.size = size;
+        }
+
     }
 
     private class Initializer implements Runnable {
