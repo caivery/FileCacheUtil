@@ -34,7 +34,7 @@ public final class IOUtils {
     public static void copy(InputStream is, OutputStream out)
             throws IOException {
         byte[] buff = new byte[4096];
-        int len = -1;
+        int len;
         while ((len = is.read(buff)) != -1) {
             out.write(buff, 0, len);
         }
