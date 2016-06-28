@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import dubu.github.com.filecacheutil.FileCache;
 import dubu.github.com.filecacheutil.FileCacheAleadyExistException;
 import dubu.github.com.filecacheutil.FileCacheFactory;
@@ -16,6 +19,8 @@ import dubu.github.com.filecacheutil.FileCacheNotFoundException;
 import dubu.github.com.filecacheutil.FileEntry;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final Logger LOGGER = Logger.getLogger(MainActivity.class.getName());
 
     private FileCache fileCache;
     private String cacheName = "dubulee";
@@ -48,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
             }
             fileCache = FileCacheFactory.getInstance().get(cacheName);
         } catch (FileCacheAleadyExistException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO,e.getMessage(),e);
         } catch (FileCacheNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO,e.getMessage(),e);
         } finally {
         }
 
